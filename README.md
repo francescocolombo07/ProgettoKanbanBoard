@@ -4,26 +4,26 @@ Kanban Board Web App
 Un’applicazione web che consente di gestire issue tramite una Kanban board.
 Le issue vengono create da un form dedicato e spostate dinamicamente tra le colonne della board:
 
-Backlog
+-Backlog
 
-In Progress
+-In Progress
 
-Review
+-Review
 
-Done
+-Done
 
 I dati vengono salvati in localStorage, così che la board sia ricostruita automaticamente ad ogni riavvio dell’applicazione.
 
-✨ Funzionalità
+Funzionalità
 
-Creazione di nuove issue tramite form “Nuova issue”
+-Creazione di nuove issue tramite form “Nuova issue”
 
-Visualizzazione e organizzazione delle issue in una Kanban board
+-Visualizzazione e organizzazione delle issue in una Kanban board
 
-Possibilità di spostare un’issue tra colonne diverse
+-Possibilità di spostare un’issue tra colonne diverse
 
-Eliminazione issue
+-Eliminazione issue
 
-Salvataggio automatico su localStorage (persistenza locale)
+-Salvataggio automatico su localStorage (persistenza locale)
 
-Ricostruzione board al riavvio
+-Ricostruzione board al riavvio
