@@ -1,0 +1,21 @@
+Requisiti funzionali
+
+L’utente deve poter creare una nuova issue tramite form.
+
+L’app deve inserire automaticamente la nuova issue nella colonna Backlog.
+
+Le issue devono poter essere spostate nelle colonne In Progress, Review e Done.
+
+Le issue devono poter essere eliminate.
+
+Ogni modifica deve aggiornare localStorage.
+
+All’avvio, l’app deve ricostruire la board leggendo i dati da localStorage.
+
+Requisiti non funzionali
+
+Utilizzo di una libreria grafica (es. Tailwind CSS o DaisyUI)
+
+L’app deve essere responsive e usabile anche da dispositivi mobili
+
+Il codice deve essere versionato con GitHub
