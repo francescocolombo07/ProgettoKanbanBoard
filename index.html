@@ -13,6 +13,7 @@
 <body class="bg-base-200 font-sans p-4 sm:p-8">
 
     <div class="container mx-auto max-w-7xl">
+        <!-- L'header e il main rimangono identici al commit precedente -->
         <header class="flex flex-col sm:flex-row justify-between items-center mb-8 pb-4 border-b border-base-300">
             <h1 class="text-3xl font-bold text-gray-800">DevTask Manager</h1>
             <div class="flex items-center gap-4 mt-4 sm:mt-0">
@@ -40,6 +41,7 @@
         </main>
     </div>
 
+    <!-- Il modulo dialog rimane identico -->
     <dialog id="modal_nuova_issue" class="modal">
         <div class="modal-box">
             <h3 class="font-bold text-lg">Crea una Nuova Issue</h3>
@@ -54,8 +56,9 @@
         <form method="dialog" class="modal-backdrop"><button>close</button></form>
     </dialog>
 
-    <script>
-        // Il cervello dell'applicazione verrà aggiunto qui nei prossimi commit
-    </script>
+    <!-- Collegamento al file JavaScript esterno -->
+    <script src="script.js"></script>
+
 </body>
 </html>
+
