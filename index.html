@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTask Manager - Kanban Board</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .kanban-column { min-height: 20rem; }
+    </style>
+</head>
+<body class="bg-base-200 font-sans p-4 sm:p-8">
+
+    <div class="container mx-auto max-w-7xl">
+        <header class="flex flex-col sm:flex-row justify-between items-center mb-8 pb-4 border-b border-base-300">
+            <h1 class="text-3xl font-bold text-gray-800">DevTask Manager</h1>
+            <div class="flex items-center gap-4 mt-4 sm:mt-0">
+                <button onclick="document.getElementById('modal_nuova_issue').showModal()" class="btn btn-primary">Nuova Issue</button>
+            </div>
+        </header>
+
+        <main id="kanban-board" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-base-100 rounded-lg shadow-sm">
+                <h2 class="font-bold text-lg p-4 border-b border-base-300 flex justify-between items-center"><span>Backlog</span></h2>
+                <div id="backlog" class="p-4 space-y-4 kanban-column"></div>
+            </div>
+            <div class="bg-base-100 rounded-lg shadow-sm">
+                <h2 class="font-bold text-lg p-4 border-b border-base-300 flex justify-between items-center"><span>In Progress</span></h2>
+                <div id="inprogress" class="p-4 space-y-4 kanban-column"></div>
+            </div>
+            <div class="bg-base-100 rounded-lg shadow-sm">
+                <h2 class="font-bold text-lg p-4 border-b border-base-300 flex justify-between items-center"><span>Review</span></h2>
+                <div id="review" class="p-4 space-y-4 kanban-column"></div>
+            </div>
+            <div class="bg-base-100 rounded-lg shadow-sm">
+                <h2 class="font-bold text-lg p-4 border-b border-base-300 flex justify-between items-center"><span>Done</span></h2>
+                <div id="done" class="p-4 space-y-4 kanban-column"></div>
+            </div>
+        </main>
+    </div>
+
+    <dialog id="modal_nuova_issue" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">Crea una Nuova Issue</h3>
+            <form id="form-nuova-issue" class="py-4 space-y-4">
+                <div><label class="label"><span class="label-text">Titolo</span></label><input type="text" id="issue-titolo" class="input input-bordered w-full" required /></div>
+                <div><label class="label"><span class="label-text">Descrizione</span></label><textarea id="issue-descrizione" class="textarea textarea-bordered w-full" required></textarea></div>
+                <div><label class="label"><span class="label-text">Assegnato a</span></label><input type="text" id="issue-assegna" class="input input-bordered w-full" required /></div>
+                <div><label class="label"><span class="label-text">Priorità</span></label><select id="issue-priorita" class="select select-bordered w-full" required><option value="low">Bassa</option><option value="medium" selected>Media</option><option value="high">Alta</option><option value="critical">Critica</option></select></div>
+                <div class="modal-action mt-6"><button type="button" class="btn btn-ghost" onclick="document.getElementById('modal_nuova_issue').close()">Annulla</button><button type="submit" class="btn btn-primary">Aggiungi Issue</button></div>
+            </form>
+        </div>
+        <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
+
+    <script>
+        // Il cervello dell'applicazione verrà aggiunto qui nei prossimi commit
+    </script>
+</body>
+</html>
