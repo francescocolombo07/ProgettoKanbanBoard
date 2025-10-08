@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="text-sm text-gray-600">${issue.description}</p>
                 <div class="flex justify-between items-center mt-2">
                     <span class="text-sm font-medium">${issue.assignee}</span>
-                    <!-- Il pulsante di eliminazione verrà aggiunto in un commit successivo -->
+                    <button class="btn btn-xs btn-ghost text-error" onclick="deleteIssue('${issue.id}')">Elimina</button>
                 </div>
             `;
 
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             columns[issue.status].appendChild(issueElement);
         });
     };
-    
+
     // Gestore per l'invio del modulo di creazione
     formNuovaIssue.addEventListener('submit', (e) => {
         e.preventDefault(); // Impedisce al browser di ricaricare la pagina
@@ -77,6 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
         formNuovaIssue.reset(); // Svuotiamo il form
         modal.close();          // Chiudiamo il pop-up
     });
+
+    window.deleteIssue = (issueId) => {
+        issues = issues.filter(issue => issue.id !== issueId);
+        saveIssues();
+        renderIssues();
+    };
 
     // Prima esecuzione al caricamento della pagina per mostrare le issue salvate
     renderIssues();
