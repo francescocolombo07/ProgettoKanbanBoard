@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const formNuovaIssue = document.getElementById('form-nuova-issue');
     const modal = document.getElementById('modal_nuova_issue');
 
-    // La nostra "fonte di verità": un array che contiene tutte le issue.
     // Lo carichiamo dal localStorage o, se non c'è, partiamo con un array vuoto.
     let issues = JSON.parse(localStorage.getItem('kanban_issues')) || [];
 
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Per ogni issue nel nostro array, creiamo l'HTML corrispondente
         issues.forEach(issue => {
             const issueElement = document.createElement('div');
-            issueElement.className = 'card bg-base-200 shadow-md p-4 space-y-3';
+            issueElement.className = 'card bg-base-200 shadow-md p-4 space-y-3 cursor-grab';
             issueElement.setAttribute('data-id', issue.id); // ID per identificarla dopo
 
             const priority = priorityStyles[issue.priority] || priorityStyles.medium;
@@ -83,6 +82,25 @@ document.addEventListener('DOMContentLoaded', () => {
         saveIssues();
         renderIssues();
     };
+
+    // Inizializzazione delle colonne drag-and-drop con SortableJS
+    Object.values(columns).forEach(column => {
+        new Sortable(column, {
+            group: 'kanban-board',
+            animation: 150,
+            onEnd: (evt) => {
+                const issueId = evt.item.dataset.id;
+                const newStatus = evt.to.id;
+                const issue = issues.find(i => i.id === issueId);
+                if (issue) {
+                    issue.status = newStatus;
+                    saveIssues();
+                    // Non serve un render completo, i dati sono aggiornati
+                }
+            }
+        });
+    });
+
 
     // Prima esecuzione al caricamento della pagina per mostrare le issue salvate
     renderIssues();
