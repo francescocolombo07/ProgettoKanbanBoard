@@ -20,6 +20,31 @@ document.addEventListener('DOMContentLoaded', () => {
         critical: { text: 'Critica', class: 'badge-neutral text-white' }
     };
 
+    // Funzione per aggiornare i contatori delle issue in ogni colonna
+    const updateCounts = () => {
+        const counts = issues.reduce((acc, issue) => {
+            acc[issue.status] = (acc[issue.status] || 0) + 1;
+            return acc;
+        }, { backlog: 0, inprogress: 0, review: 0, done: 0 });
+
+        // Funzione per aggiornare un singolo contatore, dato il suo ID e il conteggio
+        const updateSingleCount = (countId, count) => {
+            const element = document.getElementById(countId);
+            if (element) {
+                element.textContent = count;
+                element.classList.toggle('badge-outline', count === 0);
+                element.classList.toggle('badge-neutral', count > 0);
+            }
+        };
+
+        // Aggiornamento di tutti i contatori
+        updateSingleCount('backlog-count', counts.backlog);
+        updateSingleCount('inprogress-count', counts.inprogress);
+        updateSingleCount('review-count', counts.review);
+        updateSingleCount('done-count', counts.done);
+    };
+
+
     // Funzione per salvare l'array 'issues' nel localStorage del browser
     const saveIssues = () => {
         localStorage.setItem('kanban_issues', JSON.stringify(issues));
@@ -54,6 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // 3. Aggiunta della card alla colonna corretta
             columns[issue.status].appendChild(issueElement);
         });
+
+        updateCounts()
     };
 
     // Gestore per l'invio del modulo di creazione
@@ -98,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     saveIssues();
                     // Non serve rirenderizzare, SortableJS ha già aggiornato il DOM
                 }
+                updateCounts();
             }
         });
     });
