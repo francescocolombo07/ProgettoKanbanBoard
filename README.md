@@ -1,5 +1,9 @@
 # 📌 Progetto Kanban Board
 
+
+https://github.com/user-attachments/assets/975f56ac-3642-4ee9-bcad-4e4e1388f8ef
+
+
 Una semplice **Web App** per la gestione di *issue* tramite una **Kanban board** interattiva.
 
 > ⚠️ **Attenzione:** Questo progetto è concepito esclusivamente a scopo dimostrativo e non dovrebbe essere utilizzato in produzione, specialmente per la gestione di dati sensibili. Ulteriori dettagli più in basso.
