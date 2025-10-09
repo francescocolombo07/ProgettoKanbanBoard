@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Riferimenti agli elementi del DOM (la nostra interfaccia)
+    // Riferimenti agli elementi del DOM
     const columns = {
         backlog: document.getElementById('backlog'),
         inprogress: document.getElementById('inprogress'),
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formNuovaIssue = document.getElementById('form-nuova-issue');
     const modal = document.getElementById('modal_nuova_issue');
 
-    // Lo carichiamo dal localStorage o, se non c'è, partiamo con un array vuoto.
+    // Caricamento da localStorage o, se non c'è, inizializzazione di un array vuoto.
     let issues = JSON.parse(localStorage.getItem('kanban_issues')) || [];
 
     // Oggetto di configurazione per stili e testi delle priorità
@@ -25,14 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('kanban_issues', JSON.stringify(issues));
     };
 
-    // Funzione per "disegnare" le issue sulla board
+    // Funzione per disegnare le issue sulla board
     const renderIssues = () => {
-        // 1. Svuotiamo tutte le colonne per evitare duplicati
+        // 1. Inizializzazione delle colonne per evitare duplicati
         Object.values(columns).forEach(column => column.innerHTML = '');
 
-        // 2. Per ogni issue nel nostro array, creiamo l'HTML corrispondente
+        // 2. Per ogni issue nell'array, creazione dell'HTML corrispondente
         issues.forEach(issue => {
             const issueElement = document.createElement('div');
+            // Definizione della card con classi di stile e la classe per il drag-and-drop
             issueElement.className = 'card bg-base-200 shadow-md p-4 space-y-3 cursor-grab';
             issueElement.setAttribute('data-id', issue.id); // ID per identificarla dopo
 
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
-            // 3. Aggiungiamo la card appena creata alla colonna giusta
+            // 3. Aggiunta della card alla colonna corretta
             columns[issue.status].appendChild(issueElement);
         });
     };
@@ -59,22 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
     formNuovaIssue.addEventListener('submit', (e) => {
         e.preventDefault(); // Impedisce al browser di ricaricare la pagina
 
-        // Creiamo un nuovo oggetto 'issue' con i dati del form
+        // Creazione di un nuovo oggetto 'issue' con i dati del form
         const newIssue = {
             id: `issue-${Date.now()}`, // ID unico basato sul timestamp
             title: document.getElementById('issue-titolo').value,
             description: document.getElementById('issue-descrizione').value,
             assignee: document.getElementById('issue-assegna').value,
             priority: document.getElementById('issue-priorita').value,
-            status: 'backlog' // Le nuove issue partono sempre da qui
+            status: 'backlog' // 'backlog' è lo stato iniziale
         };
 
-        issues.push(newIssue); // Aggiungiamo la nuova issue al nostro array
-        saveIssues();         // Salviamo l'array aggiornato nel localStorage
-        renderIssues();       // Ridisegnamo la board per mostrare la novità
-        
-        formNuovaIssue.reset(); // Svuotiamo il form
-        modal.close();          // Chiudiamo il pop-up
+        issues.push(newIssue); // Aggiunta della issue all'array
+        saveIssues();         // Salvataggio nel localStorage
+        renderIssues();       // Aggiornamento della board
+
+        formNuovaIssue.reset(); // Svuotamento del form
+        modal.close();          // Chiusura del pop-up
     });
 
     window.deleteIssue = (issueId) => {
@@ -95,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (issue) {
                     issue.status = newStatus;
                     saveIssues();
-                    // Non serve un render completo, i dati sono aggiornati
+                    // Non serve rirenderizzare, SortableJS ha già aggiornato il DOM
                 }
             }
         });

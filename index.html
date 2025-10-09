@@ -16,15 +16,17 @@
 </head>
 <body class="bg-base-200 font-sans p-4 sm:p-8">
 
-    <div class="container mx-auto max-w-7xl">
-        <!-- L'header e il main rimangono identici al commit precedente -->
+    <!-- Container della Kanban Board -->
+    <div class="container mx-auto min-h-screen max-w-7xl">
         <header class="flex flex-col sm:flex-row justify-between items-center mb-8 pb-4 border-b border-base-300">
             <h1 class="text-3xl font-bold text-gray-800">DevTask Manager</h1>
             <div class="flex items-center gap-4 mt-4 sm:mt-0">
+                <!-- Alla pressione del pulsante viene mostrato il Dialog -->
                 <button onclick="document.getElementById('modal_nuova_issue').showModal()" class="btn btn-primary">Nuova Issue</button>
             </div>
         </header>
 
+        <!-- Griglia contenente le colonne -->
         <main id="kanban-board" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-base-100 rounded-lg shadow-sm">
                 <h2 class="font-bold text-lg p-4 border-b border-base-300 flex justify-between items-center"><span>Backlog</span></h2>
@@ -45,7 +47,7 @@
         </main>
     </div>
 
-    <!-- Il modulo dialog rimane identico -->
+    <!-- Dialog per la creazione di una nuova issue -->
     <dialog id="modal_nuova_issue" class="modal">
         <div class="modal-box">
             <h3 class="font-bold text-lg">Crea una Nuova Issue</h3>
